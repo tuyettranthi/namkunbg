@@ -60,7 +60,7 @@ clear
 echo "Script by fb.com/thuong.hai.581"
 echo "Repo: https://github.com/kmille36/Windows-11-VPS"
 
-echo "Windows Server 2016 Datacenter" > abc; echo MicrosoftWindowsServer:WindowsServer:2016-Datacenter:latest > win 
+echo "Windows Server 2022 Datacenter" > abc; echo MicrosoftWindowsServer:WindowsServer:2022-Datacenter:latest > win 
 
 
 goto step3
@@ -76,7 +76,7 @@ echo " / ___ \  / /_| |_| |  _ <| |___ "
 echo "/_/   \_\/____|\___/|_| \_\_____|"
 echo "1. Standard_DS2_v2 - 2CPU/7GB - Suitable if you want VM with the highest performance"
 echo "2. Standard_D2s_v5 - 2CPU/8GB - Suitable if you want VM with the highest performance and more ram"
-echo "3. Standard_DS12s_v2 - 2CPU/8GB - Slower than DS12_v2 and B2ms but have nested virtualization"
+echo "3. Standard_B4ms_v4 - 2CPU/8GB - Slower than DS12_v2 and B2ms but have nested virtualization"
 read -p "Please select your Azure VM size (type number then press enter):" ans
 case $ans in
     1  )  echo "OK"; echo "Standard_DS2_v2" > size ;;
@@ -144,10 +144,10 @@ goto rdp
 rs=$(cat rs)
 
 echo "Open all ports on a VM to inbound traffic"
-az vm open-port --resource-group $rs --name Windows-VM-PLUS --port '*' --output none
+az vm open-port --resource-group $rs --name Windows --port '*' --output none
 
 echo " Done! "
-IP=$(az vm show -d -g $rs -n Windows-VM-PLUS --query publicIps -o tsv)
+IP=$(az vm show -d -g $rs -n Windows --query publicIps -o tsv)
 echo "Public IP: $IP"
 echo "Username: azureuser"
 echo "Password: WindowsPassword@001"
