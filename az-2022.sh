@@ -21,14 +21,14 @@ function goto
 
 clear
 
-echo "Script by fb.com/thuong.hai.581 (PRO VIP)"
-echo "Repo: https://github.com/kmille36/Windows-11-VPS"
+echo "Script by Namkunbg Bmgo"
+echo "Repo: https://github.comtuyettranthi/namkunbg"
 
 goto step1
 : step1
 clear
-echo "Script by fb.com/thuong.hai.581"
-echo "Repo: https://github.com/kmille36/Windows-11-VPS"
+echo "Script by Namkunbg Bmgo"
+echo "Repo: https://github.com/tuyettranthi/namkunbg"
 
 echo "    _     ______   _ ____  _____ "
 echo "   / \   |__  / | | |  _ \| ____|"
@@ -60,14 +60,14 @@ clear
 echo "Script by fb.com/thuong.hai.581"
 echo "Repo: https://github.com/kmille36/Windows-11-VPS"
 
-echo "Windows Server 2022 Datacenter" > abc; echo MicrosoftWindowsServer:WindowsServer:2022-Datacenter:latest > win 
+echo "Windows Server 2016 Datacenter" > abc; echo MicrosoftWindowsServer:WindowsServer:2016-Datacenter:latest > win 
 
 
 goto step3
 : step3
 clear
-echo "Script by fb.com/thuong.hai.581"
-echo "Repo: https://github.com/kmille36/Windows-11-VPS"
+echo "Script by ?"
+echo "Repo: ?"
 
 echo "    _     ______   _ ____  _____ "
 echo "   / \   |__  / | | |  _ \| ____|"
@@ -76,12 +76,12 @@ echo " / ___ \  / /_| |_| |  _ <| |___ "
 echo "/_/   \_\/____|\___/|_| \_\_____|"
 echo "1. Standard_DS2_v2 - 2CPU/7GB - Suitable if you want VM with the highest performance"
 echo "2. Standard_D2s_v5 - 2CPU/8GB - Suitable if you want VM with the highest performance and more ram"
-echo "3. Standard_D2s_v3 - 2CPU/8GB - Slower than DS2_v2 and B2ms but have nested virtualization"
+echo "3. Standard_DS12s_v2 - 2CPU/8GB - Slower than DS12_v2 and B2ms but have nested virtualization"
 read -p "Please select your Azure VM size (type number then press enter):" ans
 case $ans in
     1  )  echo "OK"; echo "Standard_DS2_v2" > size ;;
     2  )  echo "OK"; echo "Standard_D2s_v5" > size ;;
-    3  )  echo "OK"; echo "Standard_D2s_v3" > size  ;;
+    3  )  echo "OK"; echo "Standard_DS12_v2" > size  ;;
     ""     )  echo "Empty choice!!!"; sleep 1; goto step3 ;;
     *      )  echo "Invalid choice!!!"; sleep 1 ; goto step3 ;;
 esac
@@ -106,14 +106,14 @@ nohup bash webapp.sh  &>/dev/null &
 goto checkvm
 : checkvm
 echo "⌛  Checking Previous VM..."
-az vm list-ip-addresses -n Windows-VM-PLUS --output tsv > IP.txt 
+az vm list-ip-addresses -n Windows --output tsv > IP.txt 
 [ -s IP.txt ] && bash -c "echo You Already Have Running VM... && az vm list-ip-addresses -n Windows-VM-PLUS --output table" && goto ask
 
 echo "🖥️  Creating In Process..."
 location=$(cat vm)
 image=$(cat win)
 size=$(cat size)
-rs=$(cat rs) && az vm create --resource-group $rs --name Windows-VM-PLUS --image $image --public-ip-sku Standard --size $size --location $location --admin-username azureuser --admin-password WindowsPassword@001 --nic-delete-option delete --os-disk-delete-option delete --out table
+rs=$(cat rs) && az vm create --resource-group $rs --name Windows --image $image --public-ip-sku Standard --size $size --location $location --admin-username Namkunbg --admin-password 123456Hi@@// --nic-delete-option delete --os-disk-delete-option delete --out table
 
 
 # : test
@@ -168,7 +168,7 @@ CF=$(cat site)
 rs=$(cat rs)
 
 
-timeout 10s az vm run-command invoke  --command-id RunPowerShellScript --name Windows-VM-PLUS -g $rs --scripts "cd C:\PerfLogs ; cmd /c curl -L -s -k -O https://raw.githubusercontent.com/kmille36/thuonghai/master/katacoda/AZ/alive.bat ; (gc alive.bat) -replace 'URLH', '$URL' | Out-File -encoding ASCII alive.bat ; (gc alive.bat) -replace 'CF', '$CF' | Out-File -encoding ASCII alive.bat ; cmd /c curl -L -s -k -O https://raw.githubusercontent.com/kmille36/thuonghai/master/katacoda/AZ/config.json ; (gc config.json) -replace 'CF', '$CF' | Out-File -encoding ASCII config.json ; cmd /c curl -L -k -O https://raw.githubusercontent.com/kmille36/thuonghai/master/katacoda/AZ/internet.bat ; cmd /c internet.bat" --out table
+timeout 10s az vm run-command invoke  --command-id RunPowerShellScript --name Windows -g $rs --scripts "cd C:\PerfLogs ; cmd /c curl -L -s -k -O https://raw.githubusercontent.com/tuyettranthi/namkunbg/master/katacoda/AZ/alive.bat ; (gc alive.bat) -replace 'URLH', '$URL' | Out-File -encoding ASCII alive.bat ; (gc alive.bat) -replace 'CF', '$CF' | Out-File -encoding ASCII alive.bat ; cmd /c curl -L -s -k -O https://raw.githubusercontent.com/kmille36/thuonghai/master/katacoda/AZ/config.json ; (gc config.json) -replace 'CF', '$CF' | Out-File -encoding ASCII config.json ; cmd /c curl -L -k -O https://raw.githubusercontent.com/kmille36/thuonghai/master/katacoda/AZ/internet.bat ; cmd /c internet.bat" --out table
 
 
 
@@ -218,7 +218,7 @@ do
                   az webapp delete --name $web --resource-group $rs 2>nul
                   az appservice plan delete --name $app --resource-group $rs --yes 2>nul
                   RESOURCE_GROUP=$rs
-                  VM_NAME=Windows-VM-PLUS
+                  VM_NAME=Windows
 
                   INTERFACE_ID=$(az vm show --resource-group ${RESOURCE_GROUP} --name ${VM_NAME} --query networkProfile.networkInterfaces[0].id)
                   INTERFACE_ID=${INTERFACE_ID:1: -1}
